@@ -1,0 +1,11 @@
+footer{
+    margin: 1.5rem auto;
+    display: flex;
+    justify-content: space-between;
+    
+}
+footer>div{
+    display: flex;
+    flex-direction: column;
+
+}

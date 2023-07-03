@@ -1,0 +1,25 @@
+body{
+    border: 6px solid #d4d4d2;
+    margin: 0%;
+    padding: 1.5rem 7rem;
+    
+}
+
+#main{
+    display: flex;
+    width: 100%;
+    margin: 1rem 0 1rem;
+    justify-content: space-between;
+}
+
+#main .img{
+    background-color: #3d3c23;
+}
+
+#about, #about>div:first-child{
+    display: flex;
+}
+#about>div>div:first-of-type{
+    display: flex;
+    flex-direction: column;
+}
