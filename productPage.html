@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plants</title>
+    <style>
+        body{
+            color: #486E00;
+            border: 15px solid rgba(70, 110, 0, 0.8);
+            border-radius: 15px;
+        }
+        #content{
+            display: flex;
+            width: 99%;
+           margin: auto;
+           border: 1px solid red;
+           padding: 10px;
+        }
+        #filters{
+            width: 20%;
+            border: 1px solid magenta;
+            padding: 10px;
+        }
+        #products{
+            width: 80%;
+            border: 1px solid cyan;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 40px 20px;
+           
+           
+        }
+        #filters>label{
+            display: block;
+        }
+        #item{
+            border: 1px solid;
+           
+        }
+        #products img{
+            width: 100%;
+            height: 230px;
+        }
+        #products>div{
+            width: 85%;
+        }
+        #item{
+            border-radius: 10px;
+            background-color: rgba(200, 180, 0, 0.05);
+        }
+        #item>img{
+            border-radius: 10px 10px 0px 0px;
+        }
+        #catlog{
+            padding: 15px;
+            font-size: large;
+            font-family: oswald;
+            letter-spacing: 3px;
+        }
+        #item p{
+            padding: 10px;
+            font-weight: 550;
+            color: rgba(0, 0, 0, 0.8);
+            margin-top: -5px;
+            margin-bottom: -5px;
+        }
+
+        #body{
+            width: 80%;
+            margin: auto;
+        }
+
+
+
+        input[type=range] {
+   box-sizing: border-box;
+   appearance: none;
+   width: 100px;
+   margin: 0;
+   padding: 0 2px;
+   /* Add some L/R padding to ensure box shadow of handle is shown */
+   overflow: hidden;
+   border: 0;
+   border-radius: 1px;
+   outline: none;
+   background: linear-gradient(grey, grey) no-repeat center;
+   /* Use a linear gradient to generate only the 2px height background */
+   background-size: 100% 2px;
+   pointer-events: none;
+
+   &:active,
+   &:focus {
+      outline: none;
+   }
+
+   &::-webkit-slider-thumb {
+      height: 15px;
+      width: 15px;
+      border-radius: 28px;
+      background-color: #fff;
+      position: relative;
+      margin: 5px 0;
+      /* Add some margin to ensure box shadow is shown */
+      cursor: pointer;
+      appearance: none;
+      pointer-events: all;
+      box-shadow: 0 1px 4px 0.5px rgba(0, 0, 0, 0.25);
+      &::before {
+            content: ' ';
+            display: block;
+            position: absolute;
+            top: 13px;
+            left: 100%;
+            width: 200px;
+            height: 2px;
+      }
+   }
+}
+
+.multi-range {
+   position: relative;
+   height: 50px;
+
+   input[type=range] {
+      position: absolute;
+      
+      &:nth-child(1) {
+         &::-webkit-slider-thumb::before {
+            background-color: red;
+         }
+      }
+
+      &:nth-child(2) {
+         background: none;
+
+         &::-webkit-slider-thumb::before {
+             background-color: grey; 
+         }
+      }
+   }
+}
+    </style>
+</head>
+<body>
+   <div id="body">
+    <div id="catlog"><h1>Catalog</h1></div>
+    <div id="content">
+        <div id="filters">
+            <p style=" text-decoration: underline;">Reset Filters</p>
+            <label for="c1">
+                <input type="checkbox" name="c1" id="c1">
+                Houseplants
+            </label>
+            <label for="c2">
+                <input type="checkbox" name="c2" id="c2">
+                Gardenplants
+            </label>
+            <label for="c3">
+                <input type="checkbox" name="c3" id="c3">
+                Decorative Bushes
+            </label>
+            <label for="" class="multi-range">
+                
+                    
+                        <input type="range" min="0" max="50" value="5" id="lower">
+                        <input type="range" min="0" max="50" value="45" id="upper">
+                    
+                
+            </label>
+        </div>
+        <div id="products"></div>
+    </div>
+   </div>
+</body>
+</html>
+<script type="module">
+
+import plantDetails from "./db.js";
+
+plantDetails.forEach((ele)=>{
+
+
+    if(ele!=null){
+        const div=document.createElement("div");
+        div.id="item";
+        const img = document.createElement("img");
+        img.src=ele.imageUrl1;
+        const p = document.createElement("p");
+        p.innerText=ele.name;
+        const price = document.createElement("p");
+        price.innerText="Rs: "+ele.price;
+        div.addEventListener("click",()=>{
+
+        });
+        div.append(img,p,price);
+        document.querySelector('#products').append(div);
+        
+    }
+
+});
+
+
+</script>
