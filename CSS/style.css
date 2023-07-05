@@ -1,25 +1,126 @@
-body{
-    border: 6px solid #d4d4d2;
-    margin: 0%;
-    padding: 1.5rem 7rem;
-    
+body {
+  border: 0.4rem solid #d4d4d2;
+  margin: 0%;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  /* border-top: none; */
+  /* font-family: 'PT Mono', monospace; */
 }
 
-#main{
-    display: flex;
-    width: 100%;
-    margin: 1rem 0 1rem;
+.flex {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+.flexCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#Mcatlog,
+#Ccatlog,
+#Dcatlog {
+  width: 30%;
+  background-color: rgb(71, 108, 0);
+  border: none;
+  height: 2.5rem;
+  border-radius: 1rem;
+}
+#main {
+  display: flex;
+  width: 100%;
+  gap: 4%;
+  height: fit-content;
+  padding: 0 0 3rem;
+  justify-content: space-between;
+}
+#main > div {
+  width: 48%;
+  justify-self: center;
+}
+#main img + div {
+  padding-left: 10%;
+}
+
+#main > div:first-of-type {
+  margin: auto 0;
+}
+
+#about {
+  width: 88%;
+  padding: 2rem 0;
+  gap: 4%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+#about > div {
+  width: 48%;
+  justify-content: space-between;
+}
+
+#about > div:first-child > div:first-child {
+  width: 36%;
+}
+
+#popular{
+    margin: 2rem 6% ;
+}
+
+#popular>div:first-child{
+    margin: 1rem 0;
+    align-items: center;
+}
+#popular>div:first-child>div{
+    gap: 2rem;
+}
+#popular>div:nth-child(2) img{
+    height: 350px;
+    width: 330px;
+}
+
+
+#categories{
+    margin: 3rem 6%;
+}
+#categories>div:first-child{
+    height: 5rem;
+    margin: 1rem auto 1rem;
+    align-items: center;
+}
+#categories>div:nth-child(2) img{
+    width: 94%;
+}
+
+
+#delivery {
+    width: 88%;
+    padding: 2rem 0;
+    gap: 4%;
+    margin: 0 auto;
     justify-content: space-between;
-}
+  }
+  
+  #delivery > div {
+    width: 48%;
+    justify-content: space-between;
+  }
+  
+  #delivery > div:first-child > div:first-child {
+    width: 36%;
+  }
 
-#main .img{
-    background-color: #3d3c23;
-}
-
-#about, #about>div:first-child{
-    display: flex;
-}
-#about>div>div:first-of-type{
-    display: flex;
-    flex-direction: column;
-}
+  #social{
+    margin: 0 6%;
+  }
+  #social button{
+    height: 2.5rem;
+    width: 20%;
+    border-radius: 0.5rem;
+    border: 2px solid rgb(71, 108, 0);
+    color: rgb(71, 108, 0);
+    font-size: larger;
+    font-weight: 400;
+    margin: auto 0;
+  }

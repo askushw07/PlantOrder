@@ -11,12 +11,25 @@ function navbar(){
                 <p><a href="">Contact</a></p>
             </div>
             <div>
-                <p><a><i class="fa-solid fa-magnifying-glass fa-lg"></i></a></p>
-                <p><a><i class="fa-solid fa-language fa-lg"></i></a></p>
-                <p><a><i class="fa-solid fa-user fa-lg"></i></a></p>
-                <p><a><i class="fa-solid fa-cart-shopping fa-lg"></i></a></p>
+                <p><input type="text" id="item" placeholder="Search Plant"></p>
+                <p><button id="search"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button></p>
+                <p><a href=""><i class="fa-solid fa-language fa-lg"></i></a></p>
+                <p><a href=""><i class="fa-solid fa-user fa-lg"></i></a></p>
+                <p><a href=""><i class="fa-solid fa-cart-shopping fa-lg"></i></a></p>
             </div>
         </nav>`
 }
 
-export default navbar
+async function fetchdata(){
+    let res  = await fetch("https://gentle-ant-handkerchief.cyclic.app/data");
+    let data = await res.json();
+    // console.log(data);
+    document.getElementById("search").addEventListener("click",()=>{
+        let val = document.getElementById("item").value;
+        if(!val) return;
+        else{
+            console.log(data);
+        }
+    })
+}
+export {navbar,fetchdata}
