@@ -7,38 +7,48 @@
     <style>
         body{
             color: #486E00;
-            border: 15px solid rgba(70, 110, 0, 0.8);
+            border: 15px solid rgba(70, 110, 0, 0.3);
             border-radius: 15px;
+            padding: 0;
+            margin: 0;
         }
         #content{
             display: flex;
+            justify-content: space-between;
             width: 99%;
            margin: auto;
-           border: 1px solid red;
+           border: 1px solid transparent;
            padding: 10px;
+         
         }
         #filters{
             width: 20%;
-            border: 1px solid magenta;
+            border: 1px solid transparent;
             padding: 10px;
+            font-weight: 550; font-size: large;
         }
         #products{
-            width: 80%;
-            border: 1px solid cyan;
+            width: 70%;
+            border: 1px solid transparent;
             padding: 10px;
             display: grid;
             grid-template-columns: repeat(3,1fr);
             gap: 40px 20px;
            
-           
         }
+
         #filters>label{
             display: block;
+           
+            margin-top: 30px;
+            margin: 30px;
+            margin-left: 0px;
         }
-        #item{
-            border: 1px solid;
+        #filters span{
+           
            
         }
+        
         #products img{
             width: 100%;
             height: 230px;
@@ -48,16 +58,20 @@
         }
         #item{
             border-radius: 10px;
-            background-color: rgba(200, 180, 0, 0.05);
+            background-color: rgba(221, 212, 1, 0.1);
+            color: rgba(58, 58, 58, 0.5);
         }
         #item>img{
             border-radius: 10px 10px 0px 0px;
         }
         #catlog{
             padding: 15px;
-            font-size: large;
-            font-family: oswald;
-            letter-spacing: 3px;
+           
+        }
+        #catlog>img{
+            display: block;
+            height: 70px;
+          
         }
         #item p{
             padding: 10px;
@@ -71,15 +85,51 @@
             width: 80%;
             margin: auto;
         }
+        input[type=checkbox] {
+            accent-color: rgba(70, 110, 0, 0.8);
+            
+        }
 
+        input[type=checkbox]:active ~ .geekmark {
+            background-color: red;
+        }
 
-
+        #range-number{
+            font-weight: 400;
+            color:rgba(58, 58, 58, 0.5);
+           padding-left: 10%;
+           margin-top: -10px;
+        }
+        #cart-img{
+            display: block;
+            max-width: 40px;
+            max-height: 40px;
+            padding-right: 5%;
+        }
+        #item>div{
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 25px;
+        }
+        #item:hover{
+            cursor: pointer;
+        }
+        #page{
+            width: 30%;
+            border: 1px solid;
+            margin: auto;
+            display: flex;
+            min-height: 35px;
+            align-items: center;
+            padding: 5px;
+        }
         input[type=range] {
    box-sizing: border-box;
    appearance: none;
-   width: 100px;
+   width: 37%;
    margin: 0;
-   padding: 0 2px;
+   padding: 0 0px;
+  
    /* Add some L/R padding to ensure box shadow of handle is shown */
    overflow: hidden;
    border: 0;
@@ -109,7 +159,7 @@
       box-shadow: 0 1px 4px 0.5px rgba(0, 0, 0, 0.25);
       &::before {
             content: ' ';
-            display: block;
+            display: flex;
             position: absolute;
             top: 13px;
             left: 100%;
@@ -145,7 +195,7 @@
 </head>
 <body>
    <div id="body">
-    <div id="catlog"><h1>Catalog</h1></div>
+    <div id="catlog"><img src="./Imgs/catalog_word_image_main.JPG" alt=""></div>
     <div id="content">
         <div id="filters">
             <p style=" text-decoration: underline;">Reset Filters</p>
@@ -162,44 +212,271 @@
                 Decorative Bushes
             </label>
             <label for="" class="multi-range">
-                
-                    
-                        <input type="range" min="0" max="50" value="5" id="lower">
-                        <input type="range" min="0" max="50" value="45" id="upper">
-                    
-                
+                <p>Price</p>
+                <span id="span1" style="padding-top: -5px; margin-right: -5px;"><span style="font-weight: 500;font-size: medium;">0</span>
+                    <span>
+                       <input type="range" min="0" max="2500" value="0" id="lower"  style="padding-right: -5px; margin-right: -5px;">
+                        <input type="range" min="2500" max="5000" value="5000" id="upper" style="padding-right: -5px; margin-right: -5px;">
+                    </span>
+                    <span id="span2" style="font-weight: 500;font-size: medium;margin-top: -50px; ">5000</span>
             </label>
+               <p id="range-number"></p>
         </div>
         <div id="products"></div>
     </div>
    </div>
+
+   <div id="page">
+    <div id="prevbtn"><button>&lt;</button></div>
+    <div id="pgebtn"></div>
+    <div id="nextbtn"><button>&gt;</button></div>
+   </div>
+
+
 </body>
 </html>
 <script type="module">
 
 import plantDetails from "./db.js";
 
-plantDetails.forEach((ele)=>{
 
 
-    if(ele!=null){
-        const div=document.createElement("div");
-        div.id="item";
-        const img = document.createElement("img");
-        img.src=ele.imageUrl1;
-        const p = document.createElement("p");
-        p.innerText=ele.name;
-        const price = document.createElement("p");
-        price.innerText="Rs: "+ele.price;
-        div.addEventListener("click",()=>{
 
+let cdata = [];
+let pageno=1;
+for(let i=0;i<plantDetails.length/9;i++){
+    const button =document.createElement("button");
+    button.innerText=Number(i+1);
+    document.getElementById("pgebtn").append(button);
+}
+
+display(plantDetails,pageno);
+function display(plantDetails,p){
+    document.querySelector('#products').innerHTML=null;
+   for(let i=p*9-9;i<p*9;i++){
+            let ele=plantDetails[i];
+
+if(ele!=null){
+    cdata.push(ele);
+    const div=document.createElement("div");
+    div.id="item";
+    const img = document.createElement("img");
+    img.src=ele.imageUrl1;
+    const p = document.createElement("p");
+    p.innerText=ele.name;
+    const cdiv=document.createElement("div");
+    const imgs=document.createElement("img");
+    imgs.src="./imgs/cartPlant.JPG";
+    imgs.id="cart-img";
+    imgs.addEventListener("click",()=>{
+
+    });
+    const price = document.createElement("p");
+    price.innerText="Rs: "+ele.price;
+    cdiv.append(price,imgs);
+    div.addEventListener("click",()=>{
+
+    });
+    div.append(img,p,cdiv);
+    document.querySelector('#products').append(div);
+    
+}
+
+}
+}
+
+
+
+let lowerSlider = document.querySelector('#lower');
+    let upperSlider = document.querySelector('#upper');
+   let lowerVal = parseInt(lowerSlider.value);
+  let upperVal = parseInt(upperSlider.value);
+  document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
+upperSlider.oninput = function() {
+   lowerVal = parseInt(lowerSlider.value);
+   upperVal = parseInt(upperSlider.value);
+   
+   if (upperVal < lowerVal + 4) {
+      lowerSlider.value = upperVal - 4;
+      
+      if (lowerVal == lowerSlider.min) {
+         upperSlider.value = 4;
+      }
+   }
+   let data=cdata.filter((ele)=>{
+            return ele.price>=lowerVal && ele.price<=upperVal;
         });
-        div.append(img,p,price);
-        document.querySelector('#products').append(div);
-        
-    }
+        display(data,pageno);
+   document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
+};
 
+
+lowerSlider.oninput = function() {
+  let lowerVal = parseInt(lowerSlider.value);
+  let upperVal = parseInt(upperSlider.value);
+   
+   if (lowerVal > upperVal - 4) {
+      upperSlider.value = lowerVal + 4;
+      
+      if (upperVal == upperSlider.max) {
+         lowerSlider.value = parseInt(upperSlider.max) - 4;
+      }
+     
+   }
+   let data=cdata.filter((ele)=>{
+            return ele.price>=lowerVal && ele.price<=upperVal;
+        });
+        display(data,pageno);
+   document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
+};
+
+
+
+
+document.querySelector("#c1").addEventListener("change",()=>{
+    let c1=document.getElementById("c1").checked;
+    let c2=document.getElementById("c2").checked; 
+    let c3=document.getElementById("c3").checked;
+    if(!c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+
+    }
+    else if(c1 && c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(c1 && !c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(c1 && !c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants" || ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }else if(!c1 && !c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return true;
+        });
+        display(plantDetails,pageno);
+    }
+    lowerSlider();
+    upperSlider();
 });
+
+
+document.querySelector("#c2").addEventListener("change",()=>{
+    let c1=document.getElementById("c1").checked;
+    let c2=document.getElementById("c2").checked; 
+    let c3=document.getElementById("c3").checked;
+    if(c1 && !c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
+
+    }
+    else if(c1 && c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(!c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(!c1 && c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }else if(c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants" || ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }else if(!c1 && !c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return true;
+        });
+        display(plantDetails,pageno);
+    }
+    lowerSlider();
+    upperSlider();
+});
+
+
+document.querySelector("#c3").addEventListener("change",()=>{
+    let c1=document.getElementById("c1").checked;
+    let c2=document.getElementById("c2").checked; 
+    let c3=document.getElementById("c3").checked;
+    if(c1 && c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+
+    }
+    else if(!c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Gardenplants" || ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(c1 && !c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(!c1 && !c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants" || ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }else if(!c1 && !c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return true;
+        });
+        display(plantDetails,pageno);
+    }
+    lowerSlider();
+    upperSlider();
+});
+
+
+
+
+
+
+</script>
+
+
+<script type="module" >
+   
+
 
 
 </script>
