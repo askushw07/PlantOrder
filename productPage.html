@@ -44,10 +44,7 @@
             margin: 30px;
             margin-left: 0px;
         }
-        #filters span{
-           
-           
-        }
+       
         
         #products img{
             width: 100%;
@@ -104,7 +101,8 @@
             display: block;
             max-width: 40px;
             max-height: 40px;
-            padding-right: 5%;
+            margin-right: 5%;
+           
         }
         #item>div{
             display: flex;
@@ -115,8 +113,7 @@
             cursor: pointer;
         }
         #page{
-            width: 30%;
-            border: 1px solid;
+           width: max-content;
             margin: auto;
             display: flex;
             min-height: 35px;
@@ -130,13 +127,13 @@
    margin: 0;
    padding: 0 0px;
   
-   /* Add some L/R padding to ensure box shadow of handle is shown */
+   
    overflow: hidden;
    border: 0;
    border-radius: 1px;
    outline: none;
    background: linear-gradient(grey, grey) no-repeat center;
-   /* Use a linear gradient to generate only the 2px height background */
+   
    background-size: 100% 2px;
    pointer-events: none;
 
@@ -191,6 +188,86 @@
       }
    }
 }
+
+
+#prevbtn button,#nextbtn button{
+background-color: rgba(70, 110, 0, 0.6);
+   border: 0;
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 60%;
+}
+#nextbtn button{
+    background-color: #486E00;
+}
+#cart-img:hover{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 10px;
+}
+
+
+
+
+.lds-ellipsis {
+  display: block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-top: 100px;
+  margin-left: 80%;
+  margin-right: 80%;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: rgba(70, 110, 0, 1.0);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  margin: auto;
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
     </style>
 </head>
 <body>
@@ -240,17 +317,93 @@
 import plantDetails from "./db.js";
 
 
-
+document.querySelector("#filters>p:first-child").addEventListener("click",()=>{
+    location.href="./productPage.html";
+});
 
 let cdata = [];
 let pageno=1;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+document.querySelector("#prevbtn>button").addEventListener("click",()=>{
+    event.preventDefault();
+    document.querySelector("#nextbtn>button").style.backgroundColor="rgba(70, 110, 0, 0.6)";
+    if(pageno<=1){
+        document.querySelector("#prevbtn>button").style.backgroundColor="rgba(70, 110, 0, 0.6)";
+        document.querySelector("#nextbtn>button").style.backgroundColor="rgba(70, 110, 0, 1)";
+        return;
+    }
+    event.target.parentNode.parentNode.children[1].children[pageno-1].style.backgroundColor="rgba(70, 110, 0, 0.6)";
+    event.target.parentNode.parentNode.children[1].children[pageno-2].style.backgroundColor="rgba(70, 110, 0, 1)";
+    event.target.style.backgroundColor="rgba(70, 110, 0, 1)";
+    pageno--;
+    if(pageno<1){
+        pageno=1;
+    }
+    document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+setTimeout(()=>{
+
+    display(plantDetails,pageno);
+},1000);
+
+});
+
+document.querySelector("#nextbtn>button").addEventListener("click",()=>{
+    event.preventDefault();
+    document.querySelector("#prevbtn>button").style.backgroundColor="rgba(70, 110, 0, 0.6)";
+    if(pageno>=4){
+        document.querySelector("#prevbtn>button").style.backgroundColor="rgba(70, 110, 0, 1)";
+        document.querySelector("#nextbtn>button").style.backgroundColor="rgba(70, 110, 0, 0.6)";
+        return;
+    }
+    console.log(event.target.parentNode.parentNode.children[1])
+    event.target.parentNode.parentNode.children[1].children[pageno-1].style.backgroundColor="rgba(70, 110, 0, 0.6)";
+    event.target.parentNode.parentNode.children[1].children[pageno].style.backgroundColor="rgba(70, 110, 0, 1)";
+    event.target.style.backgroundColor="rgba(70, 110, 0, 1)";
+    pageno++;
+    if(pageno>4){
+        pageno=4;
+    }
+    document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+setTimeout(()=>{
+
+    display(plantDetails,pageno);
+},1000);
+});
+
 for(let i=0;i<plantDetails.length/9;i++){
     const button =document.createElement("button");
+    button.style.margin="10px";
+    button.style.backgroundColor="rgba(70, 110, 0, 0.6)";
+    button.style.padding="5px";
+    button.style.paddingRight="10px";
+    button.style.paddingLeft="10px";
     button.innerText=Number(i+1);
+    button.style.border="0";
+    button.style.fontWeight="550";
+    button.style.color="white";
+    button.style.border="transparent";
+    button.style.borderRadius="5px";
+    button.addEventListener("click",(event)=>{
+        event.preventDefault();
+        const pgnum=event.target.innerText;
+        document.querySelector(`#pgebtn>button:nth-child(${pageno})`).style.backgroundColor="rgba(70, 110, 0, 0.6)";
+        event.target.style.backgroundColor="rgba(70, 110, 0, 1)";
+        pageno=pgnum;
+       // console.log(event.target.innerText,document.querySelector(`#pgebtn>button:nth-child(${pageno})`).innerText,pgnum)
+       document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+setTimeout(()=>{
+
+    display(plantDetails,pageno);
+},1000);
+    });
     document.getElementById("pgebtn").append(button);
 }
+document.querySelector("#pgebtn>button:first-child").style.backgroundColor="rgba(70, 110, 0, 1)";
+document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+setTimeout(()=>{
 
-display(plantDetails,pageno);
+    display(plantDetails,pageno);
+},2000);
 function display(plantDetails,p){
     document.querySelector('#products').innerHTML=null;
    for(let i=p*9-9;i<p*9;i++){
@@ -269,7 +422,11 @@ if(ele!=null){
     imgs.src="./imgs/cartPlant.JPG";
     imgs.id="cart-img";
     imgs.addEventListener("click",()=>{
-
+        event.stopPropagation();
+        const add=event.target.parentNode.parentNode.children[0].innerText;
+        cart.push(plantDetails[add-1]);
+        localStorage.setItem("cart",JSON.stringify(cart));
+        alert("Item is added to cart");
     });
     const id=document.createElement("p");
     id.innerText=ele.id;
@@ -298,7 +455,7 @@ let lowerSlider = document.querySelector('#lower');
    let lowerVal = parseInt(lowerSlider.value);
   let upperVal = parseInt(upperSlider.value);
   document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
-upperSlider.oninput = function() {
+  function us() {
    lowerVal = parseInt(lowerSlider.value);
    upperVal = parseInt(upperSlider.value);
    
@@ -315,10 +472,45 @@ upperSlider.oninput = function() {
         display(data,pageno);
    document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
 };
+upperSlider.oninput = ()=>{
 
-
-lowerSlider.oninput = function() {
+    lowerVal = parseInt(lowerSlider.value);
+   upperVal = parseInt(upperSlider.value);
+   
+   if (upperVal < lowerVal + 4) {
+      lowerSlider.value = upperVal - 4;
+      
+      if (lowerVal == lowerSlider.min) {
+         upperSlider.value = 4;
+      }
+   }
+   let data=cdata.filter((ele)=>{
+            return ele.price>=lowerVal && ele.price<=upperVal;
+        });
+        display(data,pageno);
+   document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
+};
+function ls() {
   let lowerVal = parseInt(lowerSlider.value);
+  let upperVal = parseInt(upperSlider.value);
+   
+   if (lowerVal > upperVal - 4) {
+      upperSlider.value = lowerVal + 4;
+      
+      if (upperVal == upperSlider.max) {
+         lowerSlider.value = parseInt(upperSlider.max) - 4;
+      }
+     
+   }
+   let data=cdata.filter((ele)=>{
+            return ele.price>=lowerVal && ele.price<=upperVal;
+        });
+        display(data,pageno);
+   document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
+};
+
+lowerSlider.oninput = ()=>{
+    let lowerVal = parseInt(lowerSlider.value);
   let upperVal = parseInt(upperSlider.value);
    
    if (lowerVal > upperVal - 4) {
@@ -340,9 +532,48 @@ lowerSlider.oninput = function() {
 
 
 document.querySelector("#c1").addEventListener("change",()=>{
+    document.getElementById("products").innerHTML=null;
+    document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+    setTimeout(()=>{
+        check();
+   us();
+   ls();
+    },2000);
+ 
+});
+
+
+document.querySelector("#c2").addEventListener("change",()=>{
+   
+    document.getElementById("products").innerHTML=null;
+    document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+    setTimeout(()=>{
+        check();
+   us();
+   ls();
+    },2000);
+});
+
+
+document.querySelector("#c3").addEventListener("change",()=>{
+    document.getElementById("products").innerHTML=null;
+    document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+    setTimeout(()=>{
+        check();
+   us();
+   ls();
+    },2000);
+});
+
+
+function check(){
+
+
+
     let c1=document.getElementById("c1").checked;
     let c2=document.getElementById("c2").checked; 
     let c3=document.getElementById("c3").checked;
+    console.log(c1,c2,c3)
     if(!c1 && c2 && c3){
         let data=plantDetails.filter((ele)=>{
             return ele.category=="Decorative Bushes" || ele.category=="Gardenplants";
@@ -379,59 +610,7 @@ document.querySelector("#c1").addEventListener("change",()=>{
         });
         display(plantDetails,pageno);
     }
-    lowerSlider();
-    upperSlider();
-});
-
-
-document.querySelector("#c2").addEventListener("change",()=>{
-    let c1=document.getElementById("c1").checked;
-    let c2=document.getElementById("c2").checked; 
-    let c3=document.getElementById("c3").checked;
-    if(c1 && !c2 && c3){
-        let data=plantDetails.filter((ele)=>{
-            return ele.category=="Houseplants" || ele.category=="Decorative Bushes";
-        });
-        display(plantDetails,pageno);
-
-    }
-    else if(c1 && c2 && !c3){
-        let data=plantDetails.filter((ele)=>{
-            return ele.category=="Houseplants" || ele.category=="Gardenplants";
-        });
-        display(plantDetails,pageno);
-    }
-    else if(!c1 && c2 && c3){
-        let data=plantDetails.filter((ele)=>{
-            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants";
-        });
-        display(plantDetails,pageno);
-    }
-    else if(!c1 && c2 && !c3){
-        let data=plantDetails.filter((ele)=>{
-            return ele.category=="Houseplants";
-        });
-        display(plantDetails,pageno);
-    }else if(c1 && c2 && c3){
-        let data=plantDetails.filter((ele)=>{
-            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants" || ele.category=="Houseplants";
-        });
-        display(plantDetails,pageno);
-    }else if(!c1 && !c2 && !c3){
-        let data=plantDetails.filter((ele)=>{
-            return true;
-        });
-        display(plantDetails,pageno);
-    }
-    lowerSlider();
-    upperSlider();
-});
-
-
-document.querySelector("#c3").addEventListener("change",()=>{
-    let c1=document.getElementById("c1").checked;
-    let c2=document.getElementById("c2").checked; 
-    let c3=document.getElementById("c3").checked;
+  
     if(c1 && c2 && !c3){
         let data=plantDetails.filter((ele)=>{
             return ele.category=="Houseplants" || ele.category=="Gardenplants";
@@ -468,12 +647,43 @@ document.querySelector("#c3").addEventListener("change",()=>{
         });
         display(plantDetails,pageno);
     }
-    lowerSlider();
-    upperSlider();
-});
 
+    if(c1 && !c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
 
-
+    }
+    else if(c1 && c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(!c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(!c1 && c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }else if(c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants" || ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }else if(!c1 && !c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return true;
+        });
+        display(plantDetails,pageno);
+    }
+}
 
 
 
