@@ -9,3 +9,5 @@ const imgs ={
         imageUrl8:"https://perenual.com/storage/marketplace/3-Whimsy%20and%20Wonder%20Seeds/p-RejW64156b576b1441/thumbnail/i-7-fKQf64156b5b89d7c1.jpg",
 
 };
+
+export default imgs;

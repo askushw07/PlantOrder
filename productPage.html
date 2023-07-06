@@ -271,13 +271,19 @@ if(ele!=null){
     imgs.addEventListener("click",()=>{
 
     });
+    const id=document.createElement("p");
+    id.innerText=ele.id;
+    id.style.display="none";
     const price = document.createElement("p");
     price.innerText="Rs: "+ele.price;
     cdiv.append(price,imgs);
     div.addEventListener("click",()=>{
-
+        const iid=event.target.parentNode.children[0].innerText;
+        localStorage.setItem("id",iid);
+        console.log(iid);
+        location.href="./productDetails.html";
     });
-    div.append(img,p,cdiv);
+    div.append(id,img,p,cdiv);
     document.querySelector('#products').append(div);
     
 }
