@@ -18,16 +18,17 @@
             margin: 0;
             font-family: sans-serif;
             font-size: large;
+            color: #5f5f5f;
         }
         #parent{
             display: flex;
             width: 80%;
             margin: auto;
-            border: 1px solid;
+            
         }
         #imgs{
             width: 50%;
-            border: 1px solid;
+           
            
            
            
@@ -43,26 +44,26 @@
         #mainImg{
            width: min-content;
             margin: auto;
-            border: 1px solid;
+           
             padding: 15px;
-            border: 1px solid;
+            
         }
         #mainImg>img{
-            width: 500px;
-            max-width: 500px;
-            height: 600px;
-            max-height: 600px;
+            width: 250px;
+            max-width: 250px;
+            height: 300px;
+            max-height: 300px;
         }
         #otherImg{
             display: flex;
             padding: 5px;
             margin: auto;
-            border: 1px solid;
+           
             width: min-content;
         }
         #otherImg img{
-            max-width: 250px;
-            max-height: 300px;
+            max-width: 125px;
+            max-height: 150px;
             padding: 5px;
         }
         #productName{
@@ -90,9 +91,13 @@
            
         }
         #Addtobasket{
-           padding: 10px 25px 10px 25px;
+           padding: 10px 55px 10px 55px;
+          
            font-size: larger;
             font-weight: 550;
+            background-color: rgba(70, 110, 0, 1);
+            border-radius: 10px;
+            color: white;
         }
     </style>
 </head>
@@ -137,7 +142,7 @@
       document.getElementById("otherImgs1").src=imgs.imageUrl2;
       document.getElementById("otherImgs2").src=imgs.imageUrl3;
       document.getElementById("productName").innerText=data.name;
-      let imgwidth=document.getElementById("productName").offsetWidth/3;
+      let imgwidth=document.getElementById("productName").innerText.length*19;
       document.getElementById("Imgsss").style.width=`${imgwidth}px`;
       document.getElementById("name").innerText=data.nameDes;
       document.getElementById("desc").innerText=data.desc;
