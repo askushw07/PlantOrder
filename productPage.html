@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plants</title>
+    <style>
+        body{
+            color: #486E00;
+            border: 11px solid rgba(70, 110, 0, 0.3);
+            border-radius: 15px;
+            padding: 0;
+            margin: 0;
+        }
+        #content{
+            display: flex;
+            justify-content: space-between;
+            width: 99%;
+           margin: auto;
+           border: 1px solid transparent;
+           padding: 10px;
+         
+        }
+        #filters{
+            width: 20%;
+            border: 1px solid transparent;
+            padding: 10px;
+            font-weight: 550; font-size: large;
+        }
+        #products{
+            width: 70%;
+            border: 1px solid transparent;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 40px 20px;
+           
+        }
+
+        #filters>label{
+            display: block;
+           
+            margin-top: 30px;
+            margin: 30px;
+            margin-left: 0px;
+        }
+       
+        
+        #products img{
+            width: 100%;
+            height: 230px;
+        }
+        #products>div{
+            width: 85%;
+        }
+        #item{
+            border-radius: 10px;
+            background-color: rgba(221, 212, 1, 0.1);
+            color: rgba(58, 58, 58, 0.5);
+        }
+        #item>img{
+            border-radius: 10px 10px 0px 0px;
+        }
+        #catlog{
+            padding: 15px;
+           
+        }
+        #catlog>img{
+            display: block;
+            height: 70px;
+          
+        }
+        #item p{
+            padding: 10px;
+            font-weight: 550;
+            color: rgba(0, 0, 0, 0.8);
+            margin-top: -5px;
+            margin-bottom: -5px;
+        }
+
+        #body{
+            width: 80%;
+            margin: auto;
+        }
+        input[type=checkbox] {
+            accent-color: rgba(70, 110, 0, 0.8);
+            
+        }
+
+        input[type=checkbox]:active ~ .geekmark {
+            background-color: red;
+        }
+
+        #range-number{
+            font-weight: 400;
+            color:rgba(58, 58, 58, 0.5);
+           padding-left: 10%;
+           margin-top: -10px;
+        }
+        #cart-img{
+            display: block;
+            max-width: 40px;
+            max-height: 40px;
+            margin-right: 5%;
+           
+        }
+        #item>div{
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 25px;
+        }
+        #item:hover{
+            cursor: pointer;
+        }
+        #page{
+           width: max-content;
+            margin: auto;
+            display: flex;
+            min-height: 35px;
+            align-items: center;
+            padding: 5px;
+        }
+        input[type=range] {
+   box-sizing: border-box;
+   appearance: none;
+   width: 37%;
+   margin: 0;
+   padding: 0 0px;
+  
+   
+   overflow: hidden;
+   border: 0;
+   border-radius: 1px;
+   outline: none;
+   background: linear-gradient(grey, grey) no-repeat center;
+   
+   background-size: 100% 2px;
+   pointer-events: none;
+
+   &:active,
+   &:focus {
+      outline: none;
+   }
+
+   &::-webkit-slider-thumb {
+      height: 15px;
+      width: 15px;
+      border-radius: 28px;
+      background-color: #fff;
+      position: relative;
+      margin: 5px 0;
+      /* Add some margin to ensure box shadow is shown */
+      cursor: pointer;
+      appearance: none;
+      pointer-events: all;
+      box-shadow: 0 1px 4px 0.5px rgba(0, 0, 0, 0.25);
+      &::before {
+            content: ' ';
+            display: flex;
+            position: absolute;
+            top: 13px;
+            left: 100%;
+            width: 200px;
+            height: 2px;
+      }
+   }
+}
+
+.multi-range {
+   position: relative;
+   height: 50px;
+
+   input[type=range] {
+      position: absolute;
+      
+      &:nth-child(1) {
+         &::-webkit-slider-thumb::before {
+            background-color: red;
+         }
+      }
+
+      &:nth-child(2) {
+         background: none;
+
+         &::-webkit-slider-thumb::before {
+             background-color: grey; 
+         }
+      }
+   }
+}
+
+
+#prevbtn button,#nextbtn button{
+background-color: rgba(70, 110, 0, 0.6);
+   border: 0;
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 60%;
+}
+#nextbtn button{
+    background-color: #486E00;
+}
+#cart-img:hover{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 10px;
+}
+
+
+
+
+.lds-ellipsis {
+  display: block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-top: 100px;
+  margin-left: 80%;
+  margin-right: 80%;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: rgba(70, 110, 0, 1.0);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  margin: auto;
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+    </style>
+</head>
+<body>
+   <div id="body">
+    <div id="catlog"><img src="./Imgs/catalog_word_image_main.JPG" alt=""></div>
+    <div id="content">
+        <div id="filters">
+            <p style=" text-decoration: underline;">Reset Filters</p>
+            <label for="c1">
+                <input type="checkbox" name="c1" id="c1">
+                Houseplants
+            </label>
+            <label for="c2">
+                <input type="checkbox" name="c2" id="c2">
+                Gardenplants
+            </label>
+            <label for="c3">
+                <input type="checkbox" name="c3" id="c3">
+                Decorative Bushes
+            </label>
+            <label for="" class="multi-range">
+                <p>Price</p>
+                <span id="span1" style="padding-top: -5px; margin-right: -5px;"><span style="font-weight: 500;font-size: medium;">0</span>
+                    <span>
+                       <input type="range" min="0" max="2500" value="0" id="lower"  style="padding-right: -5px; margin-right: -5px;">
+                        <input type="range" min="2500" max="5000" value="5000" id="upper" style="padding-right: -5px; margin-right: -5px;">
+                    </span>
+                    <span id="span2" style="font-weight: 500;font-size: medium;margin-top: -50px; ">5000</span>
+            </label>
+               <p id="range-number"></p>
+        </div>
+        <div id="products"></div>
+    </div>
+   </div>
+
+   <div id="page">
+    <div id="prevbtn"><button>&lt;</button></div>
+    <div id="pgebtn"></div>
+    <div id="nextbtn"><button>&gt;</button></div>
+   </div>
+
+
+</body>
+</html>
+<script type="module">
+
+import plantDetails from "./db.js";
+
+
+document.querySelector("#filters>p:first-child").addEventListener("click",()=>{
+    location.href="./productPage.html";
+});
+
+let cdata = [];
+let pageno=1;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+document.querySelector("#prevbtn>button").addEventListener("click",()=>{
+    event.preventDefault();
+    document.querySelector("#nextbtn>button").style.backgroundColor="rgba(70, 110, 0, 0.6)";
+    if(pageno<=1){
+        document.querySelector("#prevbtn>button").style.backgroundColor="rgba(70, 110, 0, 0.6)";
+        document.querySelector("#nextbtn>button").style.backgroundColor="rgba(70, 110, 0, 1)";
+        return;
+    }
+    event.target.parentNode.parentNode.children[1].children[pageno-1].style.backgroundColor="rgba(70, 110, 0, 0.6)";
+    event.target.parentNode.parentNode.children[1].children[pageno-2].style.backgroundColor="rgba(70, 110, 0, 1)";
+    event.target.style.backgroundColor="rgba(70, 110, 0, 1)";
+    pageno--;
+    if(pageno<1){
+        pageno=1;
+    }
+    document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+setTimeout(()=>{
+
+    display(plantDetails,pageno);
+},1000);
+
+});
+
+document.querySelector("#nextbtn>button").addEventListener("click",()=>{
+    event.preventDefault();
+    document.querySelector("#prevbtn>button").style.backgroundColor="rgba(70, 110, 0, 0.6)";
+    if(pageno>=4){
+        document.querySelector("#prevbtn>button").style.backgroundColor="rgba(70, 110, 0, 1)";
+        document.querySelector("#nextbtn>button").style.backgroundColor="rgba(70, 110, 0, 0.6)";
+        return;
+    }
+    console.log(event.target.parentNode.parentNode.children[1])
+    event.target.parentNode.parentNode.children[1].children[pageno-1].style.backgroundColor="rgba(70, 110, 0, 0.6)";
+    event.target.parentNode.parentNode.children[1].children[pageno].style.backgroundColor="rgba(70, 110, 0, 1)";
+    event.target.style.backgroundColor="rgba(70, 110, 0, 1)";
+    pageno++;
+    if(pageno>4){
+        pageno=4;
+    }
+    document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+setTimeout(()=>{
+
+    display(plantDetails,pageno);
+},1000);
+});
+
+for(let i=0;i<plantDetails.length/9;i++){
+    const button =document.createElement("button");
+    button.style.margin="10px";
+    button.style.backgroundColor="rgba(70, 110, 0, 0.6)";
+    button.style.padding="5px";
+    button.style.paddingRight="10px";
+    button.style.paddingLeft="10px";
+    button.innerText=Number(i+1);
+    button.style.border="0";
+    button.style.fontWeight="550";
+    button.style.color="white";
+    button.style.border="transparent";
+    button.style.borderRadius="5px";
+    button.addEventListener("click",(event)=>{
+        event.preventDefault();
+        const pgnum=event.target.innerText;
+        document.querySelector(`#pgebtn>button:nth-child(${pageno})`).style.backgroundColor="rgba(70, 110, 0, 0.6)";
+        event.target.style.backgroundColor="rgba(70, 110, 0, 1)";
+        pageno=pgnum;
+       // console.log(event.target.innerText,document.querySelector(`#pgebtn>button:nth-child(${pageno})`).innerText,pgnum)
+       document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+setTimeout(()=>{
+
+    display(plantDetails,pageno);
+},1000);
+    });
+    document.getElementById("pgebtn").append(button);
+}
+document.querySelector("#pgebtn>button:first-child").style.backgroundColor="rgba(70, 110, 0, 1)";
+document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+setTimeout(()=>{
+
+    display(plantDetails,pageno);
+},2000);
+function display(plantDetails,p){
+    document.querySelector('#products').innerHTML=null;
+   for(let i=p*9-9;i<p*9;i++){
+            let ele=plantDetails[i];
+
+if(ele!=null){
+    cdata.push(ele);
+    const div=document.createElement("div");
+    div.id="item";
+    const img = document.createElement("img");
+    img.src=ele.imageUrl1;
+    const p = document.createElement("p");
+    p.innerText=ele.name;
+    const cdiv=document.createElement("div");
+    const imgs=document.createElement("img");
+    imgs.src="./imgs/cartPlant.JPG";
+    imgs.id="cart-img";
+    imgs.addEventListener("click",()=>{
+        event.stopPropagation();
+        const add=event.target.parentNode.parentNode.children[0].innerText;
+        cart.push(plantDetails[add-1]);
+        localStorage.setItem("cart",JSON.stringify(cart));
+        alert("Item is added to cart");
+    });
+    const id=document.createElement("p");
+    id.innerText=ele.id;
+    id.style.display="none";
+    const price = document.createElement("p");
+    price.innerText="Rs: "+ele.price;
+    cdiv.append(price,imgs);
+    div.addEventListener("click",()=>{
+        const iid=event.target.parentNode.children[0].innerText;
+        localStorage.setItem("id",iid);
+        console.log(iid);
+        location.href="./productDetails.html";
+    });
+    div.append(id,img,p,cdiv);
+    document.querySelector('#products').append(div);
+    
+}
+
+}
+}
+
+
+
+let lowerSlider = document.querySelector('#lower');
+    let upperSlider = document.querySelector('#upper');
+   let lowerVal = parseInt(lowerSlider.value);
+  let upperVal = parseInt(upperSlider.value);
+  document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
+  function us() {
+   lowerVal = parseInt(lowerSlider.value);
+   upperVal = parseInt(upperSlider.value);
+   
+   if (upperVal < lowerVal + 4) {
+      lowerSlider.value = upperVal - 4;
+      
+      if (lowerVal == lowerSlider.min) {
+         upperSlider.value = 4;
+      }
+   }
+   let data=cdata.filter((ele)=>{
+            return ele.price>=lowerVal && ele.price<=upperVal;
+        });
+        display(data,pageno);
+   document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
+};
+upperSlider.oninput = ()=>{
+
+    lowerVal = parseInt(lowerSlider.value);
+   upperVal = parseInt(upperSlider.value);
+   
+   if (upperVal < lowerVal + 4) {
+      lowerSlider.value = upperVal - 4;
+      
+      if (lowerVal == lowerSlider.min) {
+         upperSlider.value = 4;
+      }
+   }
+   let data=cdata.filter((ele)=>{
+            return ele.price>=lowerVal && ele.price<=upperVal;
+        });
+        display(data,pageno);
+   document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
+};
+function ls() {
+  let lowerVal = parseInt(lowerSlider.value);
+  let upperVal = parseInt(upperSlider.value);
+   
+   if (lowerVal > upperVal - 4) {
+      upperSlider.value = lowerVal + 4;
+      
+      if (upperVal == upperSlider.max) {
+         lowerSlider.value = parseInt(upperSlider.max) - 4;
+      }
+     
+   }
+   let data=cdata.filter((ele)=>{
+            return ele.price>=lowerVal && ele.price<=upperVal;
+        });
+        display(data,pageno);
+   document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
+};
+
+lowerSlider.oninput = ()=>{
+    let lowerVal = parseInt(lowerSlider.value);
+  let upperVal = parseInt(upperSlider.value);
+   
+   if (lowerVal > upperVal - 4) {
+      upperSlider.value = lowerVal + 4;
+      
+      if (upperVal == upperSlider.max) {
+         lowerSlider.value = parseInt(upperSlider.max) - 4;
+      }
+     
+   }
+   let data=cdata.filter((ele)=>{
+            return ele.price>=lowerVal && ele.price<=upperVal;
+        });
+        display(data,pageno);
+   document.querySelector("#range-number").innerText="Min :"+lowerVal+ " Max : "+upperVal;
+};
+
+
+
+
+document.querySelector("#c1").addEventListener("change",()=>{
+    document.getElementById("products").innerHTML=null;
+    document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+    setTimeout(()=>{
+        check();
+   us();
+   ls();
+    },2000);
+ 
+});
+
+
+document.querySelector("#c2").addEventListener("change",()=>{
+   
+    document.getElementById("products").innerHTML=null;
+    document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+    setTimeout(()=>{
+        check();
+   us();
+   ls();
+    },2000);
+});
+
+
+document.querySelector("#c3").addEventListener("change",()=>{
+    document.getElementById("products").innerHTML=null;
+    document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+    setTimeout(()=>{
+        check();
+   us();
+   ls();
+    },2000);
+});
+
+
+function check(){
+
+
+
+    let c1=document.getElementById("c1").checked;
+    let c2=document.getElementById("c2").checked; 
+    let c3=document.getElementById("c3").checked;
+    console.log(c1,c2,c3)
+    if(!c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+
+    }
+    else if(c1 && c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(c1 && !c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(c1 && !c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants" || ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }else if(!c1 && !c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return true;
+        });
+        display(plantDetails,pageno);
+    }
+  
+    if(c1 && c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+
+    }
+    else if(!c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Gardenplants" || ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(c1 && !c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(!c1 && !c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants" || ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }else if(!c1 && !c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return true;
+        });
+        display(plantDetails,pageno);
+    }
+
+    if(c1 && !c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Decorative Bushes";
+        });
+        display(plantDetails,pageno);
+
+    }
+    else if(c1 && c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(!c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants";
+        });
+        display(plantDetails,pageno);
+    }
+    else if(!c1 && c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }else if(c1 && c2 && c3){
+        let data=plantDetails.filter((ele)=>{
+            return ele.category=="Decorative Bushes" || ele.category=="Gardenplants" || ele.category=="Houseplants";
+        });
+        display(plantDetails,pageno);
+    }else if(!c1 && !c2 && !c3){
+        let data=plantDetails.filter((ele)=>{
+            return true;
+        });
+        display(plantDetails,pageno);
+    }
+}
+
+
+
+</script>
+
+
+<script type="module" >
+   
+
+
+
+</script>

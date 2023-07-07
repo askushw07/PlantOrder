@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f13837cae9.js" crossorigin="anonymous"></script>
+    <title>productDetails</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Recursive:wght@500&display=swap');
+        </style>
+    <style>
+        
+        body{
+            
+            border: 11px solid rgba(70, 110, 0, 0.3);
+            border-radius: 15px;
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+            font-size: large;
+            color: #5f5f5f;
+        }
+        #parent{
+            display: flex;
+            width: 80%;
+            margin: auto;
+            
+        }
+        #imgs{
+            width: 50%;
+           
+           
+           
+           
+        }
+        #details{
+            width: 50%;
+            border: 1px solid;
+        }#headding{
+            width: 100%;
+            display: flex;
+           
+        }
+        #mainImg{
+           width: min-content;
+            margin: auto;
+           
+            padding: 15px;
+            
+        }
+        #mainImg>img{
+            width: 250px;
+            max-width: 250px;
+            height: 300px;
+            max-height: 300px;
+        }
+        #otherImg{
+            display: flex;
+            padding: 5px;
+            margin: auto;
+           
+            width: min-content;
+        }
+        #otherImg img{
+            max-width: 125px;
+            max-height: 150px;
+            padding: 5px;
+        }
+        #productName{
+            width: 100%;
+            text-align: nowrap;
+        }
+        #review{
+            display:flex;
+
+        }
+        #review > *{
+            padding: 5px;
+        }
+        #care-img{
+            max-width:500px;
+        }
+        #desc{
+            text-align: start;
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+        #Imgsss{
+            display: block;
+            margin-top: -30px;
+           
+        }
+        #Addtobasket{
+           padding: 10px 55px 10px 55px;
+          
+           font-size: larger;
+            font-weight: 550;
+            background-color: rgba(70, 110, 0, 1);
+            border-radius: 10px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <div id="imgs">
+            <div id="mainImg"><img src="" alt="" id="mainImgs"></div>
+            <div id="otherImg">
+                <img src="" alt="" id="otherImgs1"><img id="otherImgs2" src="" alt="">
+            </div>
+        </div>
+        <div id="details">
+            <div id="headding">
+                <h1 id="productName"></h1>
+            
+            </div> 
+            <div><img id="Imgsss" src="./Imgs/Undersign.JPG" alt=""></div>
+               
+            <div id="name"></div>
+            <div id="desc"></div>
+            <div id="addCart">
+                <button id="Addtobasket">Add to basket</button>
+                <i class="fa-light fa-heart" style="color: #3a3a3a;"></i>
+            </div>
+            <div id="dass">
+                <div id="review"><p>Care</p><p>Review</p></div>
+                <div id="des"></div>
+                <div id="r-img"><img src="./Imgs/care.JPG" alt="" id="care-img"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script type="module">
+ 
+      import plantDetails from "./db.js";
+      import imgs from "./extraImgs.js";
+      const id=localStorage.getItem("id");
+      const data=plantDetails[id-1];
+      document.getElementById("mainImgs").src=data.imageUrl1;
+      document.getElementById("otherImgs1").src=imgs.imageUrl2;
+      document.getElementById("otherImgs2").src=imgs.imageUrl3;
+      document.getElementById("productName").innerText=data.name;
+      let imgwidth=document.getElementById("productName").innerText.length*19;
+      document.getElementById("Imgsss").style.width=`${imgwidth}px`;
+      document.getElementById("name").innerText=data.nameDes;
+      document.getElementById("desc").innerText=data.desc;
+      console.log(imgwidth);
+
+
+</script>
