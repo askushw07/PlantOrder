@@ -35,24 +35,29 @@
         }
         #details{
             width: 50%;
-            border: 1px solid;
-        }#headding{
+           
+        }#headding,#headding1{
             width: 100%;
             display: flex;
+            justify-content: space-between;
+            color: rgba(70, 110, 0, 1);
            
+        }
+        #name{
+            font-weight: 550;
         }
         #mainImg{
            width: min-content;
             margin: auto;
            
             padding: 15px;
-            
+        
         }
         #mainImg>img{
-            width: 250px;
-            max-width: 250px;
-            height: 300px;
-            max-height: 300px;
+            width: 450px;
+            max-width: 450px;
+            height: 500px;
+            max-height: 500px;
         }
         #otherImg{
             display: flex;
@@ -62,47 +67,271 @@
             width: min-content;
         }
         #otherImg img{
-            max-width: 125px;
-            max-height: 150px;
+            max-width: 220px;
+            max-height: 245px;
             padding: 5px;
         }
-        #productName{
-            width: 100%;
-            text-align: nowrap;
+        #productName,#productName1{
+           
         }
         #review{
             display:flex;
+            font-weight: 550;
+            color: #777777;
+           
 
+        }
+        #review>p:nth-child(1){
+            color: rgba(70, 110, 0, 1);
+            
+    border-bottom-style: solid;
         }
         #review > *{
             padding: 5px;
+            padding-bottom: value;
         }
         #care-img{
-            max-width:500px;
+            width: 100%;
         }
         #desc{
             text-align: start;
             padding-top: 25px;
             padding-bottom: 25px;
         }
-        #Imgsss{
+        #Imgsss,#Imgsss1{
             display: block;
             margin-top: -30px;
+            padding-bottom: 40px;
            
         }
         #Addtobasket{
-           padding: 10px 55px 10px 55px;
+           padding: 8px 10px 8px 10px;
           
            font-size: larger;
-            font-weight: 550;
+            font-weight: 500;
             background-color: rgba(70, 110, 0, 1);
             border-radius: 10px;
             color: white;
+            letter-spacing: 2px;
+            border: 0;
         }
+        #Addtobasket:hover{
+            cursor: pointer;
+        }
+        #Addtobasket:hover{
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+        #headding>h4{
+            width: max-content;
+        }
+        #r-img{
+            display: block;
+            width: min-content;
+            margin: auto;
+            padding: 15px;
+            width: 90%;
+        }
+        #recomm{
+            display: grid;
+            grid-template-columns: repeat(9,1fr);
+            gap: 30px 30px;
+            overflow: scroll;
+            width: 75%;
+            margin: auto;
+            overflow-x: scroll;
+        }
+        #plant-img{
+            
+            width: 200px;
+            height: 230px;
+        }
+        #cart-img{
+            display: block;
+            max-width: 40px;
+            max-height: 40px;
+            margin-right: 5%;
+           
+        }
+        #cart-img{
+            display: block;
+            max-width: 40px;
+            max-height: 40px;
+            margin-right: 5%;
+           
+        }
+        #item>div{
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 25px;
+        }
+        #item:hover{
+            cursor: pointer;
+        }
+        #popular-img{
+            margin-top: 50px;
+            margin-bottom: 15px;
+            width: 400px;
+            max-width: 400px;
+            margin-left: 12.5%;
+           
+        }
+        #addCart>button{
+        width: 200px;
+    }
+        #recomm::-webkit-scrollbar {
+  display: none;
+}
+
+#recomm{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+      
+
+
+@media only screen and (max-width: 1300px) {
+     #parent{
+        width: 100%;
+     }
+}
+
+@media only screen and (max-width: 1000px) {
+    #mainImg>img{
+        width: inherit;
+        height: inherit;
+    }
+    #mainImg{
+        width: 100%;
+    }
+    #otherImg>img{
+        width: 100%;
+        height: 100%;
+    }
+    #otherImg{
+        width: max-content;
+    }
+    #imgs{
+        width: 50%;
+    }
+    #otherImg img{
+    display: block;
+    width: 600px;
+   }
+   #otherImg{
+    display: block;
+    width: 100%;
+    padding: 7px;
+   }
+   #otherImgs1{
+    max-width: max-content;
+
+   }
+   #otherImgs2{
+    width: inherit;
+   }
+   #details{
+    padding-left: 5%;
+   }
+   #headding{
+    font-size: 80%;
+    padding-bottom: 5px;
+   }
+   #Imgsss{
+    padding: 2px;
+    display: block;
+    width: min-content;
+   }
+}
+
+#imgs{
+    padding: 5px;
+}
+#headding>h4{
+    padding: 5px;
+}
+#reponsive{
+    display: none;
+}
+@media only screen and (max-width: 650px) {
+    #stk{
+       
+        padding-left: 3px;
+    }
+    #addCart>button{
+        margin: auto;
+    }
+    #addCart{
+        width: fit-content;
+        margin: auto;
+    }
+    #otherImg{
+       display: none;
+
+    }
+    #otherImg img{
+        width: 100%;
+    }
+    #parent>div{
+        width: 80%;
+        margin: auto;
+    }
+    #popular-img{
+        display: block;
+        width: 80%;
+    }
+    #mainImg{
+       
+    }
+    #mainImg{
+        padding: 5px;
+    }
+    html, body {
+  overflow-x: hidden;
+  }#catalog{
+    margin: auto;
+  }
+  #Imgsss1{
+    margin-bottom: -30px;
+  }
+}
+@media only screen and (max-width: 400px) {
+    #stk{
+        font-size: small;
+        
+    }
+    #headding1{
+    font-size: small;
+    padding-bottom: 5px;
+   }
+  #Imgss1{
+    padding: 2px;
+    display: block;
+    width: min-content;
+   }
+   #reponsive{
+    padding: 5px;
+   }
+   #parent{
+    margin: 0px;
+   }
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
     </style>
 </head>
 <body>
+    <div id="reponsive">
+        <div id="headding1">
+            <h1 id="productName1"></h1> <h4 id="stk">In stock</h4>
+        
+        </div> 
+        <div><img id="Imgsss1" src="./Imgs/Undersign.JPG" alt=""></div>
+    </div>
     <div id="parent">
+        
+        <h1 id="hres" id="productName"></h1>
         <div id="imgs">
             <div id="mainImg"><img src="" alt="" id="mainImgs"></div>
             <div id="otherImg">
@@ -111,7 +340,7 @@
         </div>
         <div id="details">
             <div id="headding">
-                <h1 id="productName"></h1>
+                <h1 id="productName"></h1> <h4>In stock</h4>
             
             </div> 
             <div><img id="Imgsss" src="./Imgs/Undersign.JPG" alt=""></div>
@@ -120,15 +349,18 @@
             <div id="desc"></div>
             <div id="addCart">
                 <button id="Addtobasket">Add to basket</button>
-                <i class="fa-light fa-heart" style="color: #3a3a3a;"></i>
+                
             </div>
             <div id="dass">
                 <div id="review"><p>Care</p><p>Review</p></div>
                 <div id="des"></div>
-                <div id="r-img"><img src="./Imgs/care.JPG" alt="" id="care-img"></div>
+                <div id="r-img"><img src="./Imgs/care.JPG" alt="" id="care-img" style="display:block"></div>
             </div>
         </div>
     </div>
+     <div id="popular-div"><img id="popular-img" src="./Imgs/popular.JPG" alt=""></div>
+    <div id="recomm"></div>
+
 </body>
 </html>
 
@@ -136,8 +368,34 @@
  
       import plantDetails from "./db.js";
       import imgs from "./extraImgs.js";
+      let cdata = [];
       const id=localStorage.getItem("id");
-      const data=plantDetails[id-1];
+let pageno=1;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const data=plantDetails[id-1];
+
+let pDetails=[];
+fetch("https://gentle-ant-handkerchief.cyclic.app/plantDetails")
+.then((res)=>{
+    return res.json();
+}).then((res1)=>{
+    console.log(res1)
+    pDetails=res1;
+    plantDetails=pDetails;
+    
+})
+
+document.getElementById("Addtobasket").addEventListener("click",()=>{
+
+    event.stopPropagation();
+        cart.push(data);
+        localStorage.setItem("cart",JSON.stringify(cart));
+        alert("Item is added to cart");
+});
+      const texts="1. Don't overwater your plants \n 2. Position them right. \n 3. Pay attention to the soil. \n 4. Use kitchen waste. \n 5. Weed your plants regularly. \n 6. Play them some tunes. \n 8. Talk to them.";
+      const review = "Avinash : Great plant \n \n Gaurav : Nice plant \n \n Aman : This is making envorment with full of energy. \n \n Abhishek : It is making my home fresh and its awsome.";
+      
+      
       document.getElementById("mainImgs").src=data.imageUrl1;
       document.getElementById("otherImgs1").src=imgs.imageUrl2;
       document.getElementById("otherImgs2").src=imgs.imageUrl3;
@@ -146,7 +404,127 @@
       document.getElementById("Imgsss").style.width=`${imgwidth}px`;
       document.getElementById("name").innerText=data.nameDes;
       document.getElementById("desc").innerText=data.desc;
+    
       console.log(imgwidth);
+      document.getElementById("des").innerText=texts;
 
+      document.querySelector("#review>p:first-child").addEventListener("click",()=>{
+        document.querySelector("#review>p:first-child").style.borderBottomStyle="solid";
+        document.querySelector("#review>p:first-child").style.color="#486E00";
+        document.querySelector("#review>p:nth-child(2)").style.borderBottomStyle="none";
+        document.querySelector("#review>p:nth-child(2)").style.color="#777777";
+        document.getElementById("des").innerText=texts;
+      });
+      document.querySelector("#review>p:nth-child(2)").addEventListener("click",()=>{
+        document.querySelector("#review>p:first-child").style.borderBottomStyle="none";
+        document.querySelector("#review>p:first-child").style.color="#777777";
+        document.querySelector("#review>p:nth-child(2)").style.borderBottomStyle="solid";
+        document.querySelector("#review>p:nth-child(2)").style.color="#486E00";
+        document.getElementById("des").innerText=review;
+      });
+
+display(plantDetails,1);
+
+      function display(plantDetails,p){
+    document.querySelector('#recomm').innerHTML=null;
+   for(let i=p*9-9;i<p*9;i++){
+            let ele=plantDetails[i];
+
+if(ele!=null){
+    cdata.push(ele);
+    const div=document.createElement("div");
+    div.id="item";
+    const img = document.createElement("img");
+    img.src=ele.imageUrl1;
+    img.id="plant-img";
+    const p = document.createElement("p");
+    p.innerText=ele.name;
+    const cdiv=document.createElement("div");
+    const imgs=document.createElement("img");
+    imgs.src="./imgs/cartPlant.JPG";
+    imgs.id="cart-img";
+    imgs.addEventListener("click",()=>{
+        event.stopPropagation();
+        const add=event.target.parentNode.parentNode.children[0].innerText;
+        cart.push(plantDetails[add-1]);
+        localStorage.setItem("cart",JSON.stringify(cart));
+        alert("Item is added to cart");
+    });
+    const id=document.createElement("p");
+    id.innerText=ele.id;
+    id.style.display="none";
+    const price = document.createElement("p");
+    price.innerText="Rs: "+ele.price;
+    cdiv.style.display="flex";
+    cdiv.style.justifyContent="space-between";
+    cdiv.append(price,imgs);
+    div.addEventListener("click",()=>{
+        const iid=event.target.parentNode.children[0].innerText;
+        localStorage.setItem("id",iid);
+        console.log(iid);
+        location.href="./productDetails.html";
+    });
+    div.append(id,img,p,cdiv);
+    document.querySelector('#recomm').append(div);
+    
+}
+
+}
+}
+function myFunction(x) {
+  if (x.matches) { 
+    let imgwidth=document.getElementById("productName").innerText.length*14;
+      document.getElementById("Imgsss").style.width=`${imgwidth}px`;
+  } else{
+    let imgwidth=document.getElementById("productName").innerText.length*19;
+      document.getElementById("Imgsss").style.width=`${imgwidth}px`;
+  }
+}
+
+var x = window.matchMedia("(max-width: 1000px)")
+myFunction(x) 
+x.addListener(myFunction)
+
+document.getElementById("productName1").innerText=data.name;
+      let imgwidth1=document.getElementById("productName1").innerText.length*19;
+      document.getElementById("Imgsss1").style.width=`${imgwidth}px`;
+
+function myFunction1(x1) {
+  if (x1.matches) { 
+    document.getElementById("productName").style.display="none";
+    document.getElementById("Imgsss").style.display="none";
+    document.getElementById("reponsive").style.display="block";
+    document.querySelector("#headding>h4").style.display="none";
+    document.getElementById("parent").style.display="block";
+    
+  
+  } else{
+    document.getElementById("productName").style.display="block";
+    document.getElementById("Imgsss").style.display="block";
+    document.getElementById("reponsive").style.display="none";
+    document.querySelector("#headding>h4").style.display="block";
+    document.getElementById("parent").style.display="flex";
+    
+  }
+}
+
+var x1 = window.matchMedia("(max-width: 650px)")
+myFunction(x1) 
+x1.addListener(myFunction1)
+
+
+function myFunction2(x2) {
+  if (x2.matches) { 
+    let imgwidth=document.getElementById("productName1").innerText.length*14;
+      document.getElementById("Imgsss1").style.width=`${imgwidth}px`;
+  } else{
+    let imgwidth=document.getElementById("productName1").innerText.length*19;
+      document.getElementById("Imgsss1").style.width=`${imgwidth}px`;
+  }
+}
+
+var x2 = window.matchMedia("(max-width: 400px)")
+myFunction(x2) 
+x2.addListener(myFunction2)
 
 </script>
