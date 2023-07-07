@@ -374,14 +374,7 @@ let pageno=1;
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const data=plantDetails[id-1];
 
-let pDetails=[];
-fetch("https://gentle-ant-handkerchief.cyclic.app/plantDetails")
-.then((res)=>{
-    return res.json();
-}).then((res1)=>{
-    
-    
-})
+
 
 document.getElementById("Addtobasket").addEventListener("click",()=>{
 

@@ -434,7 +434,7 @@ background-color: rgba(70, 110, 0, 0.6);
 </html>
 <script type="module">
 import plantDetails from "./db.js";
-let pDetails=[];
+
 
 
 
@@ -446,12 +446,10 @@ let cdata = [];
 let pageno=1;
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
-fetch("https://gentle-ant-handkerchief.cyclic.app/plantDetails")
-.then((res)=>{
-    return res.json();
-}).then((res1)=>{
-    
-})
+setTimeout(()=>{
+
+    display(plantDetails,pageno);
+},1000);
 document.querySelector("#prevbtn>button").addEventListener("click",()=>{
     event.preventDefault();
     document.querySelector("#nextbtn>button").style.backgroundColor="rgba(70, 110, 0, 0.6)";
