@@ -54,13 +54,17 @@
   
   button {
     padding: 7px;
-    background-color: #ffd814;
+    /* background-color: #ffd814; */
+    background-color: green;
     border: none;
     border-radius: 8px;
     color: black;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 10px;
+  }
+  button a{
+    color: white;
   }
   
   .Amazon-singin{
@@ -98,7 +102,7 @@
   .copyright{
     font-size: 0.85rem;
     margin-top: 10px;
-    color: gray;
+    color: black;
   }
   a:hover{
     color: red;
