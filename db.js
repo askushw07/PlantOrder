@@ -1,4 +1,4 @@
-const plantDetails = [
+let plantDetails = [
     {
         id:1,
         name:"Peace Lily Plant",

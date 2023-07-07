@@ -268,11 +268,129 @@ background-color: rgba(70, 110, 0, 0.6);
     transform: translate(24px, 0);
   }
 }
+
+#popular-img{
+            margin-top: 50px;
+            margin-bottom: 15px;
+            width: 400px;
+            max-width: 400px;
+            margin-left: 12.5%;
+           
+        }
+        #recomm::-webkit-scrollbar {
+  display: none;
+}
+
+#recomm{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+#recomm{
+            display: grid;
+            grid-template-columns: repeat(9,1fr);
+            gap: 30px 30px;
+            overflow: scroll;
+            width: 75%;
+            margin: auto;
+            overflow-x: scroll;
+        }
+        #plant-img{
+            
+            width: 200px;
+            height: 230px;
+        }
+
+        @media only screen and (max-width: 1300px) {
+
+ #popular-img{
+    margin-left: 2%;
+  
+ }
+#recomm{
+    width: 95%;
+   
+}
+        }
+
+        @media only screen and (max-width: 1050px) {
+        
+          
+            #products{
+                grid-template-columns: repeat(2,1fr);
+                width: 80%;
+             margin: auto;
+            }
+            #filters{
+                width: 35%;
+            }
+            
+        }
+
+        @media only screen and (max-width: 700px) {
+        
+        
+        #products{
+            grid-template-columns: repeat(1,1fr);
+            width: 50%;
+         margin: auto;
+        }
+        #filters{
+            width: 50%;
+        }
+        
+    }
+    @media only screen and (max-width: 500px) {
+       
+        .lds-ellipsis {
+  
+  margin-top: 100px;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+      #filters{
+        width: 100%;
+      }
+        
+        #content{
+            display: block;
+           gap: 0 0;
+          
+            
+        }
+        #item>img{
+          min-width: 200px;
+        }
+        #item{
+            
+            width: 100%;
+        }
+        #products{
+           
+          width: 100%;
+            margin: auto;
+        }
+        #popular-img{
+            width: 70%;
+        }
+        #catlog{
+            width: min-content;
+            margin: auto;
+        }
+       
+        html, body {
+  overflow-x: hidden;
+  }#catalog{
+    margin: auto;
+  }
+    }
     </style>
 </head>
 <body>
    <div id="body">
     <div id="catlog"><img src="./Imgs/catalog_word_image_main.JPG" alt=""></div>
+    <div id="hmenu">
+        
+    </div>
     <div id="content">
         <div id="filters">
             <p style=" text-decoration: underline;">Reset Filters</p>
@@ -309,12 +427,15 @@ background-color: rgba(70, 110, 0, 0.6);
     <div id="nextbtn"><button>&gt;</button></div>
    </div>
 
+   <div id="popular-div"><img id="popular-img" src="./Imgs/popular.JPG" alt=""></div>
+    <div id="recomm"></div>
 
 </body>
 </html>
 <script type="module">
-
 import plantDetails from "./db.js";
+let pDetails=[];
+
 
 
 document.querySelector("#filters>p:first-child").addEventListener("click",()=>{
@@ -324,6 +445,16 @@ document.querySelector("#filters>p:first-child").addEventListener("click",()=>{
 let cdata = [];
 let pageno=1;
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
+fetch("https://gentle-ant-handkerchief.cyclic.app/plantDetails")
+.then((res)=>{
+    return res.json();
+}).then((res1)=>{
+    console.log(res1)
+    pDetails=res1;
+    plantDetails=pDetails;
+    display(plantDetails,pageno);
+})
 document.querySelector("#prevbtn>button").addEventListener("click",()=>{
     event.preventDefault();
     document.querySelector("#nextbtn>button").style.backgroundColor="rgba(70, 110, 0, 0.6)";
@@ -399,11 +530,8 @@ setTimeout(()=>{
     document.getElementById("pgebtn").append(button);
 }
 document.querySelector("#pgebtn>button:first-child").style.backgroundColor="rgba(70, 110, 0, 1)";
-document.getElementById("products").innerHTML=`<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>`;
-setTimeout(()=>{
 
-    display(plantDetails,pageno);
-},2000);
+
 function display(plantDetails,p){
     document.querySelector('#products').innerHTML=null;
    for(let i=p*9-9;i<p*9;i++){
@@ -686,6 +814,54 @@ function check(){
 }
 
 
+display1(plantDetails,1);
+
+      function display1(plantDetails,p){
+    document.querySelector('#recomm').innerHTML=null;
+   for(let i=p*9-9;i<p*9;i++){
+            let ele=plantDetails[i];
+
+if(ele!=null){
+    cdata.push(ele);
+    const div=document.createElement("div");
+    div.id="item";
+    const img = document.createElement("img");
+    img.src=ele.imageUrl1;
+    img.id="plant-img";
+    const p = document.createElement("p");
+    p.innerText=ele.name;
+    const cdiv=document.createElement("div");
+    const imgs=document.createElement("img");
+    imgs.src="./imgs/cartPlant.JPG";
+    imgs.id="cart-img";
+    imgs.addEventListener("click",()=>{
+        event.stopPropagation();
+        const add=event.target.parentNode.parentNode.children[0].innerText;
+        cart.push(plantDetails[add-1]);
+        localStorage.setItem("cart",JSON.stringify(cart));
+        alert("Item is added to cart");
+    });
+    const id=document.createElement("p");
+    id.innerText=ele.id;
+    id.style.display="none";
+    const price = document.createElement("p");
+    price.innerText="Rs: "+ele.price;
+    cdiv.style.display="flex";
+    cdiv.style.justifyContent="space-between";
+    cdiv.append(price,imgs);
+    div.addEventListener("click",()=>{
+        const iid=event.target.parentNode.children[0].innerText;
+        localStorage.setItem("id",iid);
+        console.log(iid);
+        location.href="./productDetails.html";
+    });
+    div.append(id,img,p,cdiv);
+    document.querySelector('#recomm').append(div);
+    
+}
+
+}
+}
 
 </script>
 
