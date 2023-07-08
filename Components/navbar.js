@@ -7,7 +7,7 @@ export function navbar(){
             <div>
                 <p><a href="./productPage.html">Catlog</a></p>
                 <p><a href="">Sale</a></p>
-                <p><a href="./checkOutPage.html">Delivery & Payment</a></p>
+                <p><a href="./info.html">Delivery & Payment</a></p>
                 <p><a href="">Contact</a></p>
             </div>
             <div>
@@ -44,7 +44,7 @@ export function reponsive_nav(){
         <p><a href="">Contact</a></p>
         <p><a href="">Sale</a></p>
         <p><a href="">Cart</a></p>
-        <p><a href="./checkOutPage.html">Delivery & Payment</a></p>
+        <p><a href="./info.html">Delivery & Payment</a></p>
     </div>
   </nav>`
 }

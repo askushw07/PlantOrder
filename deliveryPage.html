@@ -21,7 +21,7 @@
     <style>
         body{
             background-color: #fff8e9;
-            font-family: 'PT Mono', monospace;
+            /* font-family: 'PT Mono', monospace; */
         }
         #info{
             padding: 30px 80px;
@@ -216,7 +216,7 @@
                 let image = document.createElement("div");
                 image.setAttribute("id","image")
                 let img = document.createElement("img");
-                img.src = elm.image_url;
+                img.src = elm.imageUrl1;
                 image.appendChild(img);
                 let div = document.createElement("div");
                 let name = document.createElement("h5");
@@ -226,15 +226,15 @@
                 let h5 = document.createElement("h5");
                 let discountPrice = document.createElement("span");
                 discountPrice.setAttribute("id","quantity");
-                discountPrice.textContent = "Qty";
+                //discountPrice.textContent = "Qty";
                 let acctualPrice = document.createElement("span");
                 acctualPrice.setAttribute("class","qty");
-                acctualPrice.textContent = `(${elm.qty} * ${elm.price})`
+                acctualPrice.textContent = `${elm.price}`
                 h5.append(discountPrice,acctualPrice);
                 let mainAcctualPrice = document.createElement("h5");
                 mainAcctualPrice.setAttribute("class","acctualPrice");
-                mainAcctualPrice.textContent = "$ "+(elm.price*elm.qty)
-                sum = sum+(elm.price*elm.qty);
+                mainAcctualPrice.textContent = "RS: "+(elm.price)
+                sum = sum+(elm.price*1);
                 price.append(h5,mainAcctualPrice);
                 let hr = document.createElement("hr");
                 div.append(name,price,hr);
@@ -245,7 +245,7 @@
                 let total = document.createElement("div");
                 total.setAttribute("id","total")
                 let totalH3 = document.createElement("h3");
-                totalH3.textContent = "Total";
+                totalH3.textContent = "Total   Rs:";
                 let totalAmount = document.createElement("h3");
                 totalAmount.textContent = sum;
                 total.append(totalH3,totalAmount);
