@@ -5,11 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Page</title>
+    
+    <link rel="stylesheet" href="./CSS/navbar.css">
+    <link rel="stylesheet" href="./CSS/footer.css">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT Mono"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
     <script src="https://kit.fontawesome.com/3e0c0ed060.js" crossorigin="anonymous"></script>
     <style>
         body{
-            background-color: #fff8e9;
-    font-family: 'PT Mono', monospace;
+            background-color: #fcfcfb;
+    /* font-family: 'PT Mono', monospace; */
         }
         #info{
             padding: 30px 80px;
@@ -53,10 +62,10 @@
             padding: 5px;
             border-radius: 3px;
         }
-        h1{
+        #info h1{
             font-size: 40px;
         }
-        label{
+        #info label{
             font-size: 17px;
         }
        
@@ -64,7 +73,7 @@
             margin-top: 30px;
         }
 
-        button{
+        #info button{
             width: 100%;
             margin-top: 15px;
             padding: 10px;
@@ -75,12 +84,12 @@
             border-radius: 3px;
             cursor: pointer;
         }
-        button:hover{
+        #info button:hover{
             scale: 1.1;
             color: whitesmoke;
             background-color: green;
         }
-        .fa-solid{
+        #info .fa-solid{
             margin-top: 20px;
         }
         
@@ -130,6 +139,11 @@
 </head>
 <header id="header"></header>
 <body>
+    <div id="nav-bar"></div>
+    <div id="navbar"></div>
+    <div id="popup">
+        <table></table>
+    </div> 
     <div id="info">
         <div id="left">
             <div>
@@ -178,7 +192,7 @@
             </div>
         </div>
     </div>
-
+    <div id="footer"></div>
     <script>
         let btn = document.getElementById("submit");
         btn.addEventListener("click",()=>{
@@ -188,6 +202,7 @@
 
         let data = JSON.parse(localStorage.getItem("cart")) || [];
         let container = document.getElementById("productDetails");
+        //console.log(container)
         let sum = 0;
         let displayData = ()=>{
             sum = 0;
@@ -196,7 +211,7 @@
                 let image = document.createElement("div");
                 image.setAttribute("id","image")
                 let img = document.createElement("img");
-                img.src = elm.image_url;
+                img.src = elm.imageUrl1;
                 image.appendChild(img);
                 let div = document.createElement("div");
                 let name = document.createElement("h5");
@@ -210,11 +225,11 @@
                 let acctualPrice = document.createElement("span");
                 acctualPrice.setAttribute("class","qty");
                 acctualPrice.textContent = `(${elm.qty} * ${elm.price})`
-                h5.append(discountPrice,acctualPrice);
+                //h5.append(discountPrice,acctualPrice);
                 let mainAcctualPrice = document.createElement("h5");
                 mainAcctualPrice.setAttribute("class","acctualPrice");
-                mainAcctualPrice.textContent = "$ "+(elm.price*elm.qty)
-                sum = sum+(elm.price*elm.qty);
+                mainAcctualPrice.textContent = "$ "+(elm.price*1)
+                sum = sum+(elm.price*1);
                 price.append(h5,mainAcctualPrice);
                 let hr = document.createElement("hr");
                 div.append(name,price,hr);
@@ -250,5 +265,7 @@
 
 
 </body>
+
+<script type="module" src="./SCRIPTS/index.js"></script>
 </html>
 

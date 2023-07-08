@@ -1,7 +1,7 @@
 export function navbar(){
     return `
         <nav>
-            <div id="logo>
+            <div id="logo">
                 <p><a href="./index.html">Green Paradise</a></p>
             </div>
             <div>
@@ -25,8 +25,10 @@ export function reponsive_nav(){
     <nav>
     <div>
       <p><input type="text" id="item" placeholder="Search Plant" style="width: 100%;"></p>
+      <div style="display:flex; gap:3rem;">
       <p><button id="search"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button></p>
       <p><a href=""><i class="fa-solid fa-language fa-lg"></i></a></p>
+      </div>
     </div>
     <div style="width: 100%;">
       <div id="logo">

@@ -2,15 +2,16 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
   }
   
   body {
     font-family: Arial, sans-serif;
     /* background-color: #f0f2f5; */
+
     background-image: url(https://c8.alamy.com/comp/ET1YGW/money-plant-devils-ivy-epipremnum-aureum-arum-family-araceae-green-ET1YGW.jpg);
     background-size: cover;
   }
+  
   
   .container {
     display: flex;
@@ -19,7 +20,7 @@
     /* height: 100vh; */
     margin-top: 50px;
     
-  
+
   }
   
   .login-form,
@@ -31,28 +32,28 @@
     border: 0.2px solid gray;
   }
   
-  h1{
+  #sign h1{
     margin-bottom: 20px;
     /* text-align: center; */
     /* text-decoration: none; */
     font-weight: 100px;
   }
   
-  form {
+  #sign form {
     display: flex;
     flex-direction: column;
   }
   
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
+  #sign input[type="text"],
+  #sign input[type="email"],
+  #sign input[type="password"] {
     padding:  7px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
   
-  button {
+  #sign button{
     padding: 7px;
     /* background-color: #ffd814; */
     background-color: green;
@@ -63,15 +64,15 @@
     transition: background-color 0.3s ease;
     margin-top: 10px;
   }
-  button a{
+  #sign button a{
     color: white;
   }
-  
-  .Amazon-singin{
-    margin-top: -50px;
+  .Amazon-act{
     text-align: center;
     margin-top: 50px;
+    color: black;
     font-size: 0.8rem;
+    font-weight: 600;
   }
   .form-p1{
     margin-bottom: 10px;
@@ -82,32 +83,32 @@
     font-size: 0.8rem;
     margin-top: 10px;
   }
-  a{
+  #sign a{
     margin-top: 10px;
     text-decoration: none;
   }
-  
+  .act-btn{
+    width: 375px;
+    border-radius: 8px;
+  }
   .foot-last{
     color: black;
     padding: 10px;
     text-align: center;
-  }
-  .pages a{
+    font-weight: 600;
+}
+.pages a{
     text-decoration: none;
     color: black;
     font-size: 0.75rem;
     margin-top: 15px;
     margin-left: 10px;
-  }
-  .copyright{
+}
+.copyright{
     font-size: 0.85rem;
     margin-top: 10px;
     color: black;
-  }
-  a:hover{
-    color: red;
-  }
-  .Amazon-singin p{
-    font-size: 0.9rem;
-  }
-  
+}
+#sign a:hover{
+  color: red;
+}
